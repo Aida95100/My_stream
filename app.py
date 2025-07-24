@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 
-st.title("This is my streamlit app")
+st.title("This is my first streamlit app")
 
 if st.button("Click me please"):
     st.balloons()
@@ -80,8 +80,7 @@ fig = px.scatter_geo(dft_merge,
                      size= 'CO2 Per Capita (metric tons)',
                      projection="natural earth")
 
-fig.show()
-
+st.plotly_chart(fig)
 
 def top_n_emitters_v2(dft_merge, start_year, end_year, top_n):
       
@@ -111,7 +110,7 @@ fig = px.choropleth(dft_merge,
                     animation_frame='Year', 
                     projection ='natural earth')
 
-fig.show()
+st.plotly_chart(fig)
 
 
 
