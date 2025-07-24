@@ -83,6 +83,36 @@ fig = px.scatter_geo(dft_merge,
 fig.show()
 
 
+def top_n_emitters_v2(dft_merge, start_year, end_year, top_n):
+      
+    dft_merge = dft_merge[(dft_merge['Year'] >= start_year) & (dft_merge['Year'] <= end_year)]
+
+    dft_merge = dft_merge.groupby(['Country Name','Continent_Name'])['CO2 Per Capita (metric tons)'].mean().reset_index()
+
+    dft_merge = dft_merge.sort_values(by='CO2 Per Capita (metric tons)', ascending=False).head(top_n)
+
+
+    fig = px.bar(dft_merge,
+                 x='Country Name',
+                 y='CO2 Per Capita (metric tons)',
+                 color ='Continent_Name',
+                 labels={'x':'Country Name', 'y':'Co2_per_capita'})
+    return fig
+
+
+
+dft_merge = dft_merge.dropna(subset= ['CO2 Per Capita (metric tons)'])
+
+dft_merge = dft_merge.sort_values(by="Year")
+
+fig = px.choropleth(dft_merge, 
+                    locations="Three_Letter_Country_Code", 
+                    color ='Continent_Name', 
+                    animation_frame='Year', 
+                    projection ='natural earth')
+
+fig.show()
+
 
 
 
