@@ -61,6 +61,28 @@ st.plotly_chart(fig)
 
 
 
+dft = pd.read_csv('data/geo_data.csv', sep=',')
+
+dft = dft[['Continent_Name', 'Three_Letter_Country_Code']]
+
+dft_merge = pd.merge(dft, df, left_on ='Three_Letter_Country_Code', right_on = 'Country Code' )
+
+dft_merge.head(5)
+
+dft_merge = dft_merge.dropna(subset= ['CO2 Per Capita (metric tons)'])
+
+dft_merge = dft_merge.sort_values(by="Year")
+
+fig = px.scatter_geo(dft_merge,
+                     animation_frame="Year",
+                     locations="Three_Letter_Country_Code",
+                     color='Continent_Name',
+                     size= 'CO2 Per Capita (metric tons)',
+                     projection="natural earth")
+
+fig.show()
+
+
 
 
 
