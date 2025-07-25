@@ -57,6 +57,7 @@ fig = px.scatter_geo(df,
                      color='CO2 Per Capita (metric tons)',
                      size='CO2 Per Capita (metric tons)',
                      projection="natural earth")
+
 st.plotly_chart(fig)
 
 
@@ -96,7 +97,9 @@ def top_n_emitters_v2(dft_merge, start_year, end_year, top_n):
                  y='CO2 Per Capita (metric tons)',
                  color ='Continent_Name',
                  labels={'x':'Country Name', 'y':'Co2_per_capita'})
-    return fig
+    
+    st.plotly_chart(fig)
+
 
 
 
